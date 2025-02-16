@@ -9,7 +9,7 @@ import record from './routes/record.js';
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use('/', record);
+app.use('/api', record);
 
 app.listen(port, () => {
 	console.log('Listening on port', port);

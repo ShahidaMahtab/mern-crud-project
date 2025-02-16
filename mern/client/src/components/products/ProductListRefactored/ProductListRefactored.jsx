@@ -13,7 +13,7 @@ const ProductListRefactored = () => {
 	const limit = 5; // Number of products per page
 
 	const fetchProducts = (page) => {
-		fetch(`http://localhost:5000/products?page=${page}&limit=${limit}`)
+		fetch(`http://localhost:5000/api/products?page=${page}&limit=${limit}`)
 			.then((res) => res.json())
 			.then((data) => {
 				setProducts(data.products);
@@ -44,7 +44,7 @@ const ProductListRefactored = () => {
 	const handleDelete = (id) => {
 		setIsUpdate(false);
 		if (window.confirm('Are you sure you want to delete this product?')) {
-			fetch(`http://localhost:5000/deleteproduct/${id}`, {
+			fetch(`http://localhost:5000/api/deleteproduct/${id}`, {
 				method: 'DELETE',
 			})
 				.then((res) => res.json())
@@ -70,7 +70,7 @@ const ProductListRefactored = () => {
 		setIsUpdate(false);
 
 		if (isEditing) {
-			fetch(`http://localhost:5000/updateproduct/${data._id}`, {
+			fetch(`http://localhost:5000/api/updateproduct/${data._id}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ const ProductListRefactored = () => {
 					console.error('Error updating product:', error)
 				);
 		} else {
-			fetch('http://localhost:5000/addproducts', {
+			fetch('http://localhost:5000/api/addproducts', {
 				method: 'POST',
 				headers: {
 					'content-type': 'application/json',

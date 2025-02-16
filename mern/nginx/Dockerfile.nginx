@@ -1,0 +1,14 @@
+# Use official Nginx image
+FROM nginx:latest
+
+# Copy our Nginx configuration file to the Nginx container
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy the built frontend files to Nginx’s web directory
+COPY mern/client/build /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]

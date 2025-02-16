@@ -1,15 +1,22 @@
+version: '3.8'
 services:
+    nginx:
+        build:
+            context: .
+            dockerfile: Dockerfile.nginx
+        ports:
+            - '80:80'
+        depends_on:
+            - server
+        networks:
+            - mern
     client:
         build: ./mern/client
-        ports:
-            - '5173:5173'
         networks:
             - mern
 
     server:
         build: ./mern/server
-        ports:
-            - '5000:5000'
         networks:
             - mern
         depends_on:
@@ -17,8 +24,6 @@ services:
 
     mongo:
         image: mongo:latest
-        ports:
-            - '27017:27017'
         networks:
             - mern
         volumes:

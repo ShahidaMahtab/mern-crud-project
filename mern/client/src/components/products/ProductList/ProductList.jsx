@@ -19,7 +19,9 @@ const ProductList = () => {
 		formState: { errors },
 	} = useForm();
 	const fetchProducts = (page) => {
-		fetch(`http://localhost:5000/products?page=${page}&limit=${limit}`)
+		fetch(
+			`http://localhost:5000/api/api/products?page=${page}&limit=${limit}`
+		)
 			.then((res) => res.json())
 			.then((data) => {
 				setProducts(data.products);
@@ -57,7 +59,7 @@ const ProductList = () => {
 
 		if (window.confirm('Are you sure you want to delete this product?')) {
 			setIsUpdate(false);
-			fetch(`http://localhost:5000/deleteproduct/${id}`, {
+			fetch(`http://localhost:5000/api/deleteproduct/${id}`, {
 				method: 'DELETE',
 			})
 				.then((res) => res.json())
@@ -82,7 +84,7 @@ const ProductList = () => {
 		};
 		if (editingProduct) {
 			setIsUpdate(false);
-			fetch(`http://localhost:5000/updateproduct/${data._id}`, {
+			fetch(`http://localhost:5000/api/updateproduct/${data._id}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
@@ -95,7 +97,7 @@ const ProductList = () => {
 					setIsUpdate(true);
 				});
 		} else {
-			fetch('http://localhost:5000/addproducts', {
+			fetch('http://localhost:5000/api/addproducts', {
 				method: 'POST',
 				headers: {
 					'content-type': 'application/json',
