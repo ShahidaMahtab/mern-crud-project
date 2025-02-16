@@ -1,0 +1,89 @@
+.submit-btn {
+	border: none;
+	background: #1677ff;
+	color: #fff;
+	font-size: 1em;
+	border-radius: 5px;
+	padding: 7px 10px;
+	cursor: pointer;
+	min-width: 100px;
+}
+.productList {
+	&-top {
+		margin-top: 50px;
+		margin-bottom: 50px;
+		display: flex;
+		justify-content: space-between;
+		h4 {
+			font-size: 1.2em;
+		}
+		button {
+			display: block;
+			background-color: #1677ff;
+			color: #fff;
+			border-radius: 5px;
+			border: none;
+			padding: 5px 10px;
+		}
+	}
+	.edit-btn,
+	.delete-btn {
+		margin-right: 10px;
+		margin-left: 10px;
+		font-size: 1em;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	.edit-btn {
+		color: #1677ff;
+		border: 1px solid #1677ff;
+	}
+	.delete-btn {
+		color: red;
+		border: 1px solid red;
+	}
+	table {
+		margin th {
+			padding: 15px;
+			text-transform: uppercase;
+			font-size: 1em;
+		}
+	}
+}
+.form {
+	&-field {
+		label {
+			display: block;
+		}
+		input {
+			display: block;
+			width: 100%;
+
+			border: 1px solid #d3d3d3;
+			border-radius: 5px;
+			padding: 6px;
+			margin-bottom: 10px;
+			&:focus {
+				outline: none;
+			}
+		}
+		p {
+			color: red;
+		}
+	}
+	::ng-deep {
+		.ant-modal-title {
+			font-size: 20px;
+		}
+	}
+}
+.pagination {
+	margin-bottom: 50px;
+	display: flex;
+	justify-content: end;
+}
+.loader {
+	padding-top: 20px;
+	display: flex;
+	justify-content: center;
+}

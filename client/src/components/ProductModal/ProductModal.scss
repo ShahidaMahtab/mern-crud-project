@@ -1,0 +1,37 @@
+.submit-btn {
+	border: none;
+	background: #1677ff;
+	color: #fff;
+	font-size: 1em;
+	border-radius: 5px;
+	padding: 7px 10px;
+	cursor: pointer;
+	min-width: 100px;
+}
+.form {
+	&-field {
+		label {
+			display: block;
+		}
+		input {
+			display: block;
+			width: 100%;
+
+			border: 1px solid #d3d3d3;
+			border-radius: 5px;
+			padding: 6px;
+			margin-bottom: 10px;
+			&:focus {
+				outline: none;
+			}
+		}
+		p {
+			color: red;
+		}
+	}
+	::ng-deep {
+		.ant-modal-title {
+			font-size: 20px;
+		}
+	}
+}
