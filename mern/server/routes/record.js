@@ -13,7 +13,8 @@ router.get('/products', async (req, res) => {
 
 	const totalProducts = await productsCollection.countDocuments();
 	const products = await productsCollection
-		.find()
+		.find({})
+		.sort({ _id: -1 })
 		.skip(skip)
 		.limit(limit)
 		.toArray();

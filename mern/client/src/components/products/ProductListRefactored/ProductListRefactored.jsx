@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Pagination } from 'antd';
+import { message, Pagination } from 'antd';
 import './ProductListRefactored.scss';
-import ProductModal from '../../ProductModal/ProductModal';
+import ProductModal from '../ProductModal/ProductModal';
 
 const ProductListRefactored = () => {
 	const [products, setProducts] = useState([]);
@@ -10,21 +10,21 @@ const ProductListRefactored = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(1);
 	const [isUpdate, setIsUpdate] = useState(false);
-	const limit = 5; // Number of products per page
+	const [totalProduct, setTotalProduct] = useState(0);
+	const [messageApi, contextHolder] = message.useMessage();
+	const limit = 5;
 
-	const fetchProducts = (page) => {
-		fetch(`http://localhost:5000/api/products?page=${page}&limit=${limit}`)
+	useEffect(() => {
+		fetch(
+			`http://localhost:5000/api/products?page=${currentPage}&limit=${limit}`
+		)
 			.then((res) => res.json())
 			.then((data) => {
 				setProducts(data.products);
 				setTotalPages(data.totalPages);
+				setTotalProduct(data.totalProducts);
 			})
 			.catch((error) => console.error('Error fetching products:', error));
-	};
-
-	// Fetch products when component mounts or page changes
-	useEffect(() => {
-		fetchProducts(currentPage);
 	}, [currentPage, isUpdate]);
 
 	const handlePageChange = (page) => {
@@ -49,8 +49,10 @@ const ProductListRefactored = () => {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					console.log('Product deleted:', data);
 					setIsUpdate(true);
+					data
+						? messageApi.success('product deleted successfully')
+						: console.log(data, 'data deleted');
 				})
 				.catch((error) =>
 					console.error('Error deleting product:', error)
@@ -80,7 +82,11 @@ const ProductListRefactored = () => {
 				.then((res) => res.json())
 				.then((data) => {
 					console.log(data, 'product updated');
+
 					setIsUpdate(true);
+					data
+						? messageApi.success('product updated successfully')
+						: console.log(data, 'data updated');
 				})
 				.catch((error) =>
 					console.error('Error updating product:', error)
@@ -95,8 +101,9 @@ const ProductListRefactored = () => {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					console.log(data, 'data');
-					alert('product added successfully');
+					data
+						? messageApi.success('product added successfully')
+						: console.log(data, 'data added');
 					setIsUpdate(true);
 				})
 				.catch((error) =>
@@ -109,9 +116,10 @@ const ProductListRefactored = () => {
 
 	return (
 		<section className='productList'>
+			{contextHolder}
 			<div className='container'>
 				<div className='productList-top'>
-					<h4>Products</h4>
+					<h4>Total Products: {totalProduct}</h4>
 					<button onClick={showAddModal}>Add Product</button>
 				</div>
 				<div className='table table-responsive'>
